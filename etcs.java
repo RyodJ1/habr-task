@@ -21,6 +21,7 @@ public class etcs {
 
 
 
+
 public class etcs {
     public static void main(String[] args) {
 for(int i = 2; i <= 100; i ++){
@@ -38,6 +39,7 @@ for(int i = 2; i <= 100; i ++){
 }
    }
 }
+
 
 
 
@@ -91,6 +93,7 @@ public static void main(String[] args) {
         System.out.println("min = " + min);
         System.out.println("avg = " + avg);
     }
+
 
 
 
@@ -159,3 +162,131 @@ public class ProgrammingCompetition {
 
 
 
+
+
+public static int bruteForce(double[] array, double key) {
+    for (int i = 0; i < array.length; i++) {
+        if (array[i] == key)
+            return i;
+    }
+    return -1;
+}
+public static int binarySearchRecursively(double[] sortedArray, double key) {
+    return binarySearchRecursively(sortedArray, key, 0, sortedArray.length);
+}
+private static int binarySearchRecursively
+                (double[] sortedArray, double key, int low, int high) {
+    int middle = (low + high) / 2; 
+
+    if (high < low) { 
+        return -1;
+    }
+
+    if (key == sortedArray[middle]) { 
+        return middle;
+    } else if (key < sortedArray[middle]) { 
+        return binarySearchRecursively(
+                sortedArray, key, low, middle - 1);
+    } else {
+        return binarySearchRecursively( 
+                sortedArray, key, middle + 1, high);
+    }
+}
+private static double[] generateRandomArray(int length) {
+    double[] array = new double[length];
+    for (int i = 0; i < array.length; i++) {
+        array[i] = Math.random();
+    }
+    return array;
+}
+public static void main(String[] args) {
+    double[] array = generateRandomArray(100000000);
+    Arrays.sort(array); 
+    long time = System.currentTimeMillis(); 
+    bruteForce(array, 0.5);
+    System.out.println(System.currentTimeMillis() - time);
+
+    time = System.currentTimeMillis();
+    binarySearchRecursively(array, 0.5);
+    System.out.println(System.currentTimeMillis() - time);
+}
+
+
+
+
+
+public class etcs {
+    public static void main(String[] args) {
+public static double func(double x){
+    return Math.cos(Math.pow(x, 5)) + Math.pow(x, 4) - 345.3 * x - 23;
+}
+public static double  solve(double start, double end){
+    if(end - start <= 0.001){
+        return start;
+    }
+    double x = start + (end - start) / 2;
+
+    if(func(start) * func(x) > 0){
+        return solve(x, end);
+    } else {
+        return solve(start, x);
+    }
+}
+public static void main(String[] args) {
+    System.out.println(solve(0, 10)); 
+}
+    }}
+
+
+
+
+
+
+public class etcs {
+    public static void main(String[] args) {
+         void buildDictionaryWithMap(String text){
+        text = text.toLowerCase();
+        Map<Character, Integer> map = new HashMap<>();
+        for(int i = 0; i < text.length(); i++){
+            char ch = text.charAt(i);
+
+            if((ch >= 'а' && ch <= 'я') || ch == 'ё'){
+                map.compute(ch, (character, integer)
+                        -> integer == null ? 1 : integer + 1);
+            }
+        }
+        ArrayList<Map.Entry<Character, Integer>> entries =
+                new ArrayList<>(map.entrySet());
+        entries.sort((o1, o2) -> Character.compare(o1.getKey(), o2.getKey()));
+        for(Map.Entry<Character, Integer> entry : entries){
+            System.out.println(entry.getKey() + " " + entry.getValue());
+        }
+    }
+
+
+
+
+
+
+
+  public static void compare2Lists() {
+        ArrayList<Double> arrayList = new ArrayList<>();
+        LinkedList<Double> linkedList = new LinkedList<>();
+        final int N = 1000000;
+        final int M = 1000;
+        for (int i = 0; i < N; i++) {
+            arrayList.add(Math.random());
+            linkedList.add(Math.random());
+        }
+        long startTime = System.currentTimeMillis();
+        for (int i = 0; i < M; i++) {
+            arrayList.get((int) (Math.random() * (N - 1)));
+        }
+        System.out.println(System.currentTimeMillis() - startTime);
+
+        startTime = System.currentTimeMillis();
+        for (int i = 0; i < M; i++) {
+            linkedList.get((int) (Math.random() * (N - 1)));
+        }
+        System.out.println(System.currentTimeMillis() - startTime);
+    }
