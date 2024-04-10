@@ -290,3 +290,21 @@ public class etcs {
         }
         System.out.println(System.currentTimeMillis() - startTime);
     }
+
+
+
+
+
+public static <K> Map<K, Integer> countValues(K[] ks) {
+        Map<K, Integer> map = new HashMap<>();
+        for (K k : ks) {
+            map.compute(k, new BiFunction<K, Integer, Integer>() {
+                @Override
+                public Integer apply(K k, Integer count) {
+                    return count == null ? 1 : count + 1;
+                }
+            });
+        }
+
+        return map;
+    }
